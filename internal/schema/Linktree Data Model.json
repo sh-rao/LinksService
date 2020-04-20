@@ -1,0 +1,84 @@
+{
+  "ModelName": "Linktree Data Model",
+  "ModelMetadata": {
+    "Author": "Shankar Rao",
+    "DateCreated": "Apr 10, 2020, 05:13 PM",
+    "DateLastModified": "Apr 10, 2020, 05:31 PM",
+    "Description": "Data model representing users and links (for linktree)",
+    "Version": "1.0"
+  },
+  "DataModel": [
+    {
+      "TableName": "UserLinks",
+      "KeyAttributes": {
+        "PartitionKey": {
+          "AttributeName": "UserId",
+          "AttributeType": "S"
+        },
+        "SortKey": {
+          "AttributeName": "LinkDateCreated",
+          "AttributeType": "S"
+        }
+      },
+      "NonKeyAttributes": [
+        {
+          "AttributeName": "LinkId",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "LinkType",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "LinkData",
+          "AttributeType": "S"
+        }
+      ],
+      "TableFacets": [
+        {
+          "FacetName": "FindLinksByUserId",
+          "KeyAttributeAlias": {
+            "PartitionKeyAlias": "User id",
+            "SortKeyAlias": "Link Creation Date"
+          },
+          "TableData": [],
+          "NonKeyAttributes": [
+            "LinkId",
+            "LinkType",
+            "LinkData"
+          ]
+        },
+        {
+          "FacetName": "FindLinksByUserIdSortedByDateCreated",
+          "KeyAttributeAlias": {
+            "PartitionKeyAlias": "User id",
+            "SortKeyAlias": "Link Creation Date"
+          },
+          "TableData": [],
+          "NonKeyAttributes": [
+            "LinkId",
+            "LinkType",
+            "LinkData"
+          ]
+        }
+      ],
+      "GlobalSecondaryIndexes": [
+        {
+          "IndexName": "GSI1",
+          "KeyAttributes": {
+            "PartitionKey": {
+              "AttributeName": "LinkId",
+              "AttributeType": "S"
+            }
+          },
+          "Projection": {
+            "ProjectionType": "ALL"
+          }
+        }
+      ],
+      "DataAccess": {
+        "MySql": {}
+      }
+    }
+  ]
+}
