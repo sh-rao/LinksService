@@ -55,6 +55,7 @@ With these two access patterns in mind `UserLinks` table has been modelled with 
 I hate to use time as an excuse but given an extra few hours or so, I would improvise the current design and implementation with the following:
 
 - The schemas that are constants in all the validators can be pulled into their own separate files and manged by a config service
+- PACT can be used to do contract testing for requests coming in and responses going out so that the `validate` files can concentrate more on business validation instead of json attribute level validation.
 - The handler should be agnostic about the actual link type and SHOULD NOT have to do a switch/case to marshal the link data.
   A factory can be used for this purpose by injected it to the handler.
 - Logging and error handling can be improved by passing context and using context logger where ever necessary.
@@ -92,6 +93,7 @@ I hate to use time as an excuse but given an extra few hours or so, I would impr
   
   # Running unit tests
   Units tests can be run by the following command from the project's root folder (e.g. LinksService)
+  Due to date format issue `validate_shows_list` tests are failing.
   ~~~
   go test ./... -v
   ~~~
